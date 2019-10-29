@@ -1,0 +1,14 @@
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\bin\Release\ProjectionBuilder.exe.config
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\bin\Release\ProjectionBuilder.exe
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\bin\Release\ProjectionBuilder.pdb
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\bin\Release\CsvHelper.dll
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\bin\Release\Newtonsoft.Json.dll
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\bin\Release\Newtonsoft.Json.xml
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Release\ProjectionBuilder.csprojAssemblyReference.cache
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Release\ProjectionBuilder.Form1.resources
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Release\ProjectionBuilder.Properties.Resources.resources
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Release\ProjectionBuilder.csproj.GenerateResource.cache
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Release\ProjectionBuilder.csproj.CoreCompileInputs.cache
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Release\ProjectionBuilder.csproj.CopyComplete
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Release\ProjectionBuilder.exe
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Release\ProjectionBuilder.pdb
