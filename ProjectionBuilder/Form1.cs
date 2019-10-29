@@ -29,11 +29,8 @@ namespace ProjectionBuilder
         {
             Date = date_textbox.Text;
             lineup_bp_text.Text = GetFilepath(DocumentFilepaths.TopLineups);
-            var players = CSVBuilder.BuildPlayers(GetFilepath(DocumentFilepaths.PlayerList));
-            players = players.Where(p => p.ProjectedCSV != null && p.PPGAvg != null && p.PPGFloor != null && p.PPGMax != null).ToList();
-            players.ForEach(s => s.PreProjected = Convert.ToDouble(s.ProjectedCSV));
-            Players = players;
-            BuildTeams(players);
+            Players = BuilderService.SetUpPlayers(GetFilepath(DocumentFilepaths.PlayerList));
+            Teams = BuilderService.BuildTeams(Players);
             ShowTeams();
             BB_Teams_gb.Visible = true;
             lineup_gb.Visible = true;
@@ -85,36 +82,6 @@ namespace ProjectionBuilder
             }
 
         }
-        private void BuildTeams(List<BasketballPlayer> players)
-        {
-            Teams = new Dictionary<string, Team>();
-            foreach (var player in players)
-            {
-                if (!Teams.ContainsKey(player.Team))
-                {
-                    Teams.Add(player.Team, new Team(player.Team));
-                }
-
-                switch (player.Position)
-                {
-                    case "PG":
-                        Teams[player.Team].PointGuards.Add(player);
-                        break;
-                    case "SG":
-                        Teams[player.Team].ShootingGuards.Add(player);
-                        break;
-                    case "SF":
-                        Teams[player.Team].SmallForwards.Add(player);
-                        break;
-                    case "PF":
-                        Teams[player.Team].PowerForwards.Add(player);
-                        break;
-                    case "C":
-                        Teams[player.Team].Centers.Add(player);
-                        break;
-                }
-            }
-        }
         private void ShowTeams()
         {
             foreach(var team in Teams)
@@ -132,10 +99,7 @@ namespace ProjectionBuilder
 
         private void Projections_btn_Click(object sender, EventArgs e)
         {
-            foreach(var team in Teams)
-            {
-                team.Value.GenerateProjections(AverageScore);
-            }
+            Teams = BuilderService.GenerateProjections(AverageScore, Teams);
             Generate_proj_gb.Visible = false;
             Generate_csv_gb.Visible = true;
         }

@@ -23,7 +23,6 @@ namespace ProjectionBuilder.Services
                 csv.Configuration.MissingFieldFound = null;
                 rtnList = csv.GetRecords<BasketballPlayer>().ToList();
             }
-
             return rtnList;
         }
 

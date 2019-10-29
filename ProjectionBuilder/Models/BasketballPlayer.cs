@@ -33,11 +33,14 @@ namespace ProjectionBuilder.Models
         [Name("L5_dvp_rank")]
         public int DVPLastFive { get; set; }
         [Name("L5_ppg_floor")]
-        public double? PPGFloor { get; set; }
+        public double? PPGFloorCSV { get; set; }
         [Name("L5_ppg_max")]
-        public double? PPGMax { get; set; }
+        public double? PPGMaxCSV { get; set; }
         [Name("L5_ppg_avg")]
-        public double? PPGAvg { get; set; }
+        public double? PPGAvgCSV { get; set; }
+        public double PPGFloor { get; set; }
+        public double PPGMax { get; set; }
+        public double PPGAvg { get; set; }
         [Name("ppg_projection")]
         public double? ProjectedCSV { get; set; }
         public double PreProjected { get; set; }
