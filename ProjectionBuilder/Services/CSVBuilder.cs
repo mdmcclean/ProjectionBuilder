@@ -50,6 +50,16 @@ namespace ProjectionBuilder.Services
                 csv.WriteRecords(playerHelper);
             }
 
+            string[] jsonFpArr = filepath.Split('\\');
+            jsonFpArr[jsonFpArr.Length - 1] = "player_list.json";
+            string jfp = String.Join("\\", jsonFpArr);
+            BuildPlayerListJson(players, jfp);
+        }
+
+        public static void BuildPlayerListJson(List<BasketballPlayer> players, string filepath)
+        {
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(players);
+            File.WriteAllText(filepath, json);
         }
 
         public static void BuildConfig(string lineups, string maxPrice, string wtnr, string basepath, string date)
