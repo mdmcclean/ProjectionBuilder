@@ -52,7 +52,13 @@ namespace ProjectionBuilder.Models
                 return Salary / Projected;
             }
         }
-
-
+        public double DVPMultiplier
+        {
+            get
+            {
+                double rtn = ((DVPLastFive - 15) / 120.0);
+                return rtn;
+            }
+        }
     }
 }

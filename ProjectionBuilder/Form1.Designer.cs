@@ -111,6 +111,7 @@
             this.get_top_lineups_btn = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.lineup_gb = new System.Windows.Forms.GroupBox();
+            this.start_bb_python_btn = new System.Windows.Forms.Button();
             this.BB_Teams_gb.SuspendLayout();
             this.Date_gb.SuspendLayout();
             this.Generate_proj_gb.SuspendLayout();
@@ -909,11 +910,22 @@
             this.lineup_gb.TabStop = false;
             this.lineup_gb.Visible = false;
             // 
+            // start_bb_python_btn
+            // 
+            this.start_bb_python_btn.Location = new System.Drawing.Point(74, 606);
+            this.start_bb_python_btn.Name = "start_bb_python_btn";
+            this.start_bb_python_btn.Size = new System.Drawing.Size(161, 38);
+            this.start_bb_python_btn.TabIndex = 70;
+            this.start_bb_python_btn.Text = "Generate Lineups";
+            this.start_bb_python_btn.UseVisualStyleBackColor = true;
+            this.start_bb_python_btn.Click += new System.EventHandler(this.Start_bb_python_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1219, 752);
+            this.Controls.Add(this.start_bb_python_btn);
             this.Controls.Add(this.lineup_gb);
             this.Controls.Add(this.BB_Teams_gb);
             this.Controls.Add(this.Generate_csv_gb);
@@ -1019,6 +1031,7 @@
         private System.Windows.Forms.Button get_top_lineups_btn;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.GroupBox lineup_gb;
+        private System.Windows.Forms.Button start_bb_python_btn;
     }
 }
 

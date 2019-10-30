@@ -60,7 +60,7 @@ namespace ProjectionBuilder.Models
             foreach(var player in teamPlayers)
             {
                 double percentOfTeam = player.PreProjected / TeamTotalPoints;
-                double playerMultiplier = multiplier * percentOfTeam + 1;
+                double playerMultiplier = (multiplier * percentOfTeam) + (percentOfTeam* player.DVPMultiplier) + 1;
                 player.Projected = playerMultiplier * player.PreProjected;
             }
 

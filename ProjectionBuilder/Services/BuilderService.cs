@@ -13,9 +13,11 @@ namespace ProjectionBuilder.Services
         {
             var players = CSVBuilder.BuildPlayers(filepath);
             players = players.Where(p => p.ProjectedCSV != null && p.PPGAvgCSV != null && p.PPGFloorCSV != null && p.PPGMaxCSV != null).ToList();
-            players.ForEach(p => {  p.PPGAvg = Convert.ToDouble(p.PPGAvg);
+            players.ForEach(p => {
+                p.PPGAvg = Convert.ToDouble(p.PPGAvg);
                 p.PPGMax = Convert.ToDouble(p.PPGMaxCSV);
                 p.PPGFloor = Convert.ToDouble(p.PPGFloorCSV);
+                p.PreProjected = Convert.ToDouble(p.ProjectedCSV);
             });
             return players;
         }

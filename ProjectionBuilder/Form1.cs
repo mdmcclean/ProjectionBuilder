@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ namespace ProjectionBuilder
         public Dictionary<string, Team> Teams { get; set; }
         public double AverageScore { get; set; }
         public string Date { get; set; }
-
+        private readonly string UserBasepath = @"C:\Users\15133\Documents\dfs\";
         public Form1()
         {
             InitializeComponent();
@@ -40,15 +42,15 @@ namespace ProjectionBuilder
         {
             if (filepath == DocumentFilepaths.PlayerList)
             {
-                return $"C:\\Users\\15133\\Documents\\dfs\\Basketball\\{Date}\\Player List\\playerlist.csv";
+                return $"{UserBasepath}\\Basketball\\{Date}\\Player List\\playerlist.csv";
             }
             else if(filepath == DocumentFilepaths.PlayersWithProjections)
             {
-                return $"C:\\Users\\15133\\Documents\\dfs\\Basketball\\{Date}\\Player List\\nba.csv";
+                return $"{UserBasepath}\\Basketball\\{Date}\\Player List\\nba.csv";
             }
             else if(filepath == DocumentFilepaths.TopLineups)
             {
-                return $"C:\\Users\\15133\\Documents\\dfs\\Basketball\\{Date}\\Lineups\\top_lineups.txt";
+                return $"{UserBasepath}\\Basketball\\{Date}\\Lineups\\top_lineups.txt";
             }
             return "";
         }
@@ -117,6 +119,14 @@ namespace ProjectionBuilder
             string fp = lineup_bp_text.Text;
             string topLineups = CSVBuilder.GetTxtText(fp);
             top_lineups_tb.Text = topLineups;
+        }
+
+        private void Start_bb_python_btn_Click(object sender, EventArgs e)
+        {
+            string pythonPath = Path.Combine(UserBasepath, "ProjectionBuilder", "python scripts", "dfs-nba-fuel.py");
+            Process lineupProc = new Process();
+            lineupProc.StartInfo.FileName = pythonPath;
+            lineupProc.Start();
         }
     }
 }
