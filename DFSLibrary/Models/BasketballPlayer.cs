@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CsvHelper;
 using CsvHelper.Configuration.Attributes;
 
-namespace ProjectionBuilder.Models
+namespace DFSLibrary.Models
 {
     public class BasketballPlayer
     {

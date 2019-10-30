@@ -12,3 +12,5 @@ C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Debug\Proje
 C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Debug\ProjectionBuilder.csproj.CopyComplete
 C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Debug\ProjectionBuilder.exe
 C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\obj\Debug\ProjectionBuilder.pdb
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\bin\Debug\DFSLibrary.dll
+C:\Users\15133\Documents\dfs\ProjectionBuilder\ProjectionBuilder\bin\Debug\DFSLibrary.pdb
