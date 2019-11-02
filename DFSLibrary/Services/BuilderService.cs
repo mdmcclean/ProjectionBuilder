@@ -12,12 +12,15 @@ namespace DFSLibrary.Services
         public static List<BasketballPlayer> SetUpPlayers(string filepath)
         {
             var players = FileBuilder.BuildPlayers(filepath);
-            players = players.Where(p => p.ProjectedCSV != null && p.PPGAvgCSV != null && p.PPGFloorCSV != null && p.PPGMaxCSV != null).ToList();
+            players = players.Where(p => p.ProjectedCSV != null && p.PPGAvgCSV != null && p.PPGFloorCSV != null && 
+                                    p.PPGMaxCSV != null && p.PointsPerMinuteCSV != null && p.TotalMinutesCSV != null).ToList();
             players.ForEach(p => {
                 p.PPGAvg = Convert.ToDouble(p.PPGAvg);
                 p.PPGMax = Convert.ToDouble(p.PPGMaxCSV);
                 p.PPGFloor = Convert.ToDouble(p.PPGFloorCSV);
                 p.PreProjected = Convert.ToDouble(p.ProjectedCSV);
+                p.PointsPerMinute = Convert.ToDouble(p.PointsPerMinuteCSV);
+                p.TotalMinutes = Convert.ToDouble(p.TotalMinutesCSV);
             });
             return players;
         }

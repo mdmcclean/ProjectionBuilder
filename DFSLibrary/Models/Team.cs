@@ -48,7 +48,6 @@ namespace DFSLibrary.Models
             teamPlayers.AddRange(Centers);
 
             double multiplier = (ImpliedScore - Average) / 50;
-
             double pgScore = PointGuards.Sum(s => s.PreProjected);
             double sgScore = ShootingGuards.Sum(s => s.PreProjected);
             double sfScore = SmallForwards.Sum(s => s.PreProjected);
@@ -56,12 +55,14 @@ namespace DFSLibrary.Models
             double cScore = Centers.Sum(s => s.PreProjected);
 
             TeamTotalPoints = pgScore + sgScore + sfScore + pfScore + cScore;
-
+            
             foreach(var player in teamPlayers)
             {
-                double percentOfTeam = player.PreProjected / TeamTotalPoints;
+                double projectedPointsNoMult = player.PointsPerMinute * player.TotalMinutes;
+                double projectedAverage = (projectedPointsNoMult + player.PreProjected) / 2;
+                double percentOfTeam = projectedAverage / TeamTotalPoints;
                 double playerMultiplier = (multiplier * percentOfTeam) + (percentOfTeam* player.DVPMultiplier) + 1;
-                player.Projected = playerMultiplier * player.PreProjected;
+                player.Projected = playerMultiplier * projectedAverage;
             }
 
             

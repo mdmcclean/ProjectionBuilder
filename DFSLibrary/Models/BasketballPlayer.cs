@@ -10,25 +10,16 @@ namespace DFSLibrary.Models
 {
     public class BasketballPlayer : Player
     {
-        [Name("first_name")]
-        public string FirstName { get; set; }
-        [Name("last_name")]
-        public string LastName { get; set; }
-        public string Name
-        {
-            get
-            {
-                return $"{FirstName} {LastName}";
-            }
-        }
-        [Name("position")]
+        [Name("Name")]
+        public string Name{  get; set; }
+        [Name("Pos")]
         public string Position { get; set; }
-        [Name("team")]
+        [Name("Team")]
         public string Team { get; set; }
-        [Name("opp")]
+        [Name("Opponent")]
         public string Opponent { get; set; }
         public double ImpliedScore { get; set; }
-        [Name("salary")]
+        [Name("Salary")]
         public double Salary { get; set; }
         [Name("L5_dvp_rank")]
         public int DVPLastFive { get; set; }
@@ -43,6 +34,15 @@ namespace DFSLibrary.Models
         public double PPGAvg { get; set; }
         [Name("ppg_projection")]
         public double? ProjectedCSV { get; set; }
+        [Name("Pts/Min")]
+        public double? PointsPerMinuteCSV { get; set; }
+        public double PointsPerMinute { get; set; }
+        [Name("Target Value")]
+        public double TargetValueCSV { get; set; }
+        public double TargetValue { get; set; }
+        [Name("ToMin")]
+        public double? TotalMinutesCSV { get; set; }
+        public double TotalMinutes { get; set; }
         public double PreProjected { get; set; }
         public double Projected { get; set; }
         public double PricePerPoint
