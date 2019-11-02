@@ -11,7 +11,7 @@ namespace DFSLibrary.Services
     {
         public static List<BasketballPlayer> SetUpPlayers(string filepath)
         {
-            var players = CSVBuilder.BuildPlayers(filepath);
+            var players = FileBuilder.BuildPlayers(filepath);
             players = players.Where(p => p.ProjectedCSV != null && p.PPGAvgCSV != null && p.PPGFloorCSV != null && p.PPGMaxCSV != null).ToList();
             players.ForEach(p => {
                 p.PPGAvg = Convert.ToDouble(p.PPGAvg);

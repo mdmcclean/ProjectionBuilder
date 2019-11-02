@@ -8,7 +8,7 @@ using CsvHelper.Configuration.Attributes;
 
 namespace DFSLibrary.Models
 {
-    public class BasketballPlayer
+    public class BasketballPlayer : Player
     {
         [Name("first_name")]
         public string FirstName { get; set; }
@@ -59,6 +59,16 @@ namespace DFSLibrary.Models
                 double rtn = ((DVPLastFive - 15) / 120.0);
                 return rtn;
             }
+        }
+
+        public void SetPlayer()
+        {
+            base.PlayerName = Name;
+            base.PlayerPosition = Position;
+            base.PlayerPricePerPoint = PricePerPoint;
+            base.PlayerProjected = Projected;
+            base.PlayerSalary = Salary;
+            base.PlayerTeam = Team;
         }
     }
 }

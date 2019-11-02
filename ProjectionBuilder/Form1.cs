@@ -53,6 +53,10 @@ namespace ProjectionBuilder
             {
                 return $"{UserBasepath}\\Basketball\\{Date}\\Lineups\\top_lineups.txt";
             }
+            else if(filepath == DocumentFilepaths.NBAJsonPlayerList)
+            {
+                return $"{UserBasepath}\\Basketball\\{Date}\\Player List\\player_list.json";
+            }
             return "";
         }
 
@@ -110,23 +114,26 @@ namespace ProjectionBuilder
         private void Generate_CSV_btn_Click(object sender, EventArgs e)
         {
             string fp = GetFilepath(DocumentFilepaths.PlayersWithProjections);
-            CSVBuilder.BuildCSV(Players, fp);
-            CSVBuilder.BuildConfig(Lineups_tb.Text, MaxPrice_tb.Text, WTNR_tb.Text, basepath_tb.Text, Date);
+            FileBuilder.BuildCSV(Players, fp);
+            FileBuilder.BuildConfig(Lineups_tb.Text, MaxPrice_tb.Text, WTNR_tb.Text, basepath_tb.Text, Date);
             MessageBox.Show("Success! Your CSV is located at " + fp, "Success", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
 
         private void Get_top_lineups_btn_Click(object sender, EventArgs e)
         {
             string fp = lineup_bp_text.Text;
-            string topLineups = CSVBuilder.GetTxtText(fp);
+            string topLineups = FileBuilder.GetTxtText(fp);
             top_lineups_tb.Text = topLineups;
         }
 
         private void Start_bb_python_btn_Click(object sender, EventArgs e)
         {
+            string csharpPath = @"C:\Users\15133\Documents\dfs\ProjectionBuilder\NBALineupBuilder\bin\Debug\NBALineupBuilder.exe";
             string pythonPath = Path.Combine(UserBasepath, "ProjectionBuilder", "python scripts", "dfs-nba-fuel.py");
             Process lineupProc = new Process();
-            lineupProc.StartInfo.FileName = pythonPath;
+            //lineupProc.StartInfo.FileName = pythonPath;
+            lineupProc.StartInfo.FileName = csharpPath;
+            lineupProc.StartInfo.Arguments = $"\"{GetFilepath(DocumentFilepaths.NBAJsonPlayerList)}\"";
             lineupProc.Start();
         }
     }

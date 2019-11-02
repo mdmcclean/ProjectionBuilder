@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectionBuilder", "Projec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFSLibrary", "DFSLibrary\DFSLibrary.csproj", "{C678509E-4854-4905-BF9B-B005CACFFA37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBALineupBuilder", "NBALineupBuilder\NBALineupBuilder.csproj", "{99A1BC49-374D-40DB-9F3B-8BDCE8D1EBB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C678509E-4854-4905-BF9B-B005CACFFA37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C678509E-4854-4905-BF9B-B005CACFFA37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C678509E-4854-4905-BF9B-B005CACFFA37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99A1BC49-374D-40DB-9F3B-8BDCE8D1EBB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99A1BC49-374D-40DB-9F3B-8BDCE8D1EBB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99A1BC49-374D-40DB-9F3B-8BDCE8D1EBB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99A1BC49-374D-40DB-9F3B-8BDCE8D1EBB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

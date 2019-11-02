@@ -9,7 +9,7 @@ using DFSLibrary.Models;
 
 namespace DFSLibrary.Services
 {
-    public class CSVBuilder
+    public class FileBuilder
     {
         public static List<BasketballPlayer> BuildPlayers(string filepath)
         {
@@ -31,6 +31,7 @@ namespace DFSLibrary.Services
             List<CSVHelper> playerHelper = new List<CSVHelper>();
             foreach(var player in players)
             {
+                player.SetPlayer();
                 playerHelper.Add(new CSVHelper()
                 {
                     Name = player.Name,
@@ -56,7 +57,48 @@ namespace DFSLibrary.Services
             BuildPlayerListJson(players, jfp);
         }
 
+        public static void WriteTopLineups(List<NBALineup> topLineups, string topLineupOutputPath)
+        {
+            string topLineupString = "";
+            for(int i = 0; i < topLineups.Count; i++)
+            {
+                topLineupString += BuildNBALineupString(topLineups[i], i + 1);
+            }
+            File.WriteAllLines(topLineupOutputPath, topLineupString.Split('\n'));
+
+
+            string[] jsonFpArr = topLineupOutputPath.Split('\\');
+            jsonFpArr[jsonFpArr.Length - 1] = "toplineupsjson.json";
+            string jfp = String.Join("\\", jsonFpArr);
+            BuildTopLineupListJson(topLineups, jfp);
+        }
+        public static string BuildNBALineupString(NBALineup lineup, int position)
+        {
+            string rtnString = $"-----------{position}-----------\n" +
+                                $"{lineup.PointGuard1.TopLineupString}\n" +
+                                $"{lineup.PointGuard2.TopLineupString}\n" +
+                                $"{lineup.ShootingGuard1.TopLineupString}\n" +
+                                $"{lineup.ShootingGuard2.TopLineupString}\n" +
+                                $"{lineup.SmallForward1.TopLineupString}\n" +
+                                $"{lineup.SmallForward2.TopLineupString}\n" +
+                                $"{lineup.PowerForward1.TopLineupString}\n" +
+                                $"{lineup.PowerForward2.TopLineupString}\n" +
+                                $"{lineup.Center.TopLineupString}\n" +
+                                $"\nCost: {lineup.Price}\n" +
+                                $"Projected Total: {lineup.Score.ToString("0.####")}\n\n";
+
+            return rtnString;
+        }
+
         public static void BuildPlayerListJson(List<BasketballPlayer> players, string filepath)
+        {
+            List<Player> playerList = new List<Player>();
+            playerList.AddRange(players);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(playerList);
+            File.WriteAllText(filepath, json);
+        }
+
+        public static void BuildTopLineupListJson(List<NBALineup> players, string filepath)
         {
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(players);
             File.WriteAllText(filepath, json);
@@ -96,6 +138,7 @@ namespace DFSLibrary.Services
         PlayerList = 0,
         PlayersWithProjections = 1,
         TopLineups = 2,
-        DFSConfigFile = 3
+        DFSConfigFile = 3,
+        NBAJsonPlayerList = 4
     }
 }
