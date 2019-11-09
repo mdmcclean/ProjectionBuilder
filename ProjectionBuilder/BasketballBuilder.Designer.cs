@@ -1,6 +1,6 @@
 ﻿namespace ProjectionBuilder
 {
-    partial class Form1
+    partial class BasketballBuilder
     {
         /// <summary>
         /// Required designer variable.
@@ -684,12 +684,11 @@
             this.BB_Teams_gb.Controls.Add(this.label4);
             this.BB_Teams_gb.Controls.Add(this.label3);
             this.BB_Teams_gb.Controls.Add(this.label2);
-            this.BB_Teams_gb.Location = new System.Drawing.Point(9, 47);
+            this.BB_Teams_gb.Location = new System.Drawing.Point(12, 12);
             this.BB_Teams_gb.Name = "BB_Teams_gb";
             this.BB_Teams_gb.Size = new System.Drawing.Size(525, 479);
             this.BB_Teams_gb.TabIndex = 59;
             this.BB_Teams_gb.TabStop = false;
-            this.BB_Teams_gb.Visible = false;
             // 
             // WAS_tb
             // 
@@ -920,7 +919,7 @@
             this.start_bb_python_btn.UseVisualStyleBackColor = true;
             this.start_bb_python_btn.Click += new System.EventHandler(this.Start_bb_python_btn_Click);
             // 
-            // Form1
+            // BasketballBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -931,7 +930,7 @@
             this.Controls.Add(this.Generate_csv_gb);
             this.Controls.Add(this.Generate_proj_gb);
             this.Controls.Add(this.Date_gb);
-            this.Name = "Form1";
+            this.Name = "BasketballBuilder";
             this.Text = "Form1";
             this.BB_Teams_gb.ResumeLayout(false);
             this.BB_Teams_gb.PerformLayout();

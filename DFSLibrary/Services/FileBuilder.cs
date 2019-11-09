@@ -122,6 +122,26 @@ namespace DFSLibrary.Services
         {
             return File.ReadAllText(filepath);
         }
+        public static string GetFilepath(DocumentFilepaths filepath, string UserBasepath, string Date, string sport)
+        {
+            if (filepath == DocumentFilepaths.PlayerList)
+            {
+                return $"{UserBasepath}\\{sport}\\{Date}\\Player List\\playerlist.csv";
+            }
+            else if (filepath == DocumentFilepaths.PlayersWithProjections)
+            {
+                return $"{UserBasepath}\\{sport}\\{Date}\\Player List\\nba.csv";
+            }
+            else if (filepath == DocumentFilepaths.TopLineups)
+            {
+                return $"{UserBasepath}\\{sport}\\{Date}\\Lineups\\top_lineups.txt";
+            }
+            else if (filepath == DocumentFilepaths.JsonPlayerList)
+            {
+                return $"{UserBasepath}\\{sport}\\{Date}\\Player List\\player_list.json";
+            }
+            return "";
+        }
 
         public class CSVHelper
         {
@@ -139,6 +159,6 @@ namespace DFSLibrary.Services
         PlayersWithProjections = 1,
         TopLineups = 2,
         DFSConfigFile = 3,
-        NBAJsonPlayerList = 4
+        JsonPlayerList = 4
     }
 }

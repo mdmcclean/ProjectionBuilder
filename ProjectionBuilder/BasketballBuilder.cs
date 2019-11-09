@@ -15,49 +15,29 @@ using DFSLibrary.Services;
 
 namespace ProjectionBuilder
 {
-    public partial class Form1 : Form
+    public partial class BasketballBuilder : Form
     {
         public List<BasketballPlayer> Players { get; set; }
         public Dictionary<string, Team> Teams { get; set; }
         public double AverageScore { get; set; }
         public string Date { get; set; }
+        private readonly string Basketball = "Basketball";
         private readonly string UserBasepath = @"C:\Users\15133\Documents\dfs\";
-        public Form1()
+        public BasketballBuilder(string date)
         {
             InitializeComponent();
-            BB_Teams_gb.Visible = false;
-        }
-
-        private void Generate_btn_Click(object sender, EventArgs e)
-        {
-            Date = date_textbox.Text;
-            lineup_bp_text.Text = GetFilepath(DocumentFilepaths.TopLineups);
-            Players = BuilderService.SetUpPlayers(GetFilepath(DocumentFilepaths.PlayerList));
+            Date_gb.Visible = false;
+            Date = date;
+            lineup_bp_text.Text = FileBuilder.GetFilepath(DocumentFilepaths.TopLineups, UserBasepath, Date, Basketball);
+            Players = BuilderService.SetUpPlayers(FileBuilder.GetFilepath(DocumentFilepaths.PlayerList, UserBasepath, Date, Basketball));
             Teams = BuilderService.BuildTeams(Players);
             ShowTeams();
             BB_Teams_gb.Visible = true;
             lineup_gb.Visible = true;
-            Date_gb.Visible = false;
         }
-        private string GetFilepath(DocumentFilepaths filepath)
+
+        private void Generate_btn_Click(object sender, EventArgs e)
         {
-            if (filepath == DocumentFilepaths.PlayerList)
-            {
-                return $"{UserBasepath}\\Basketball\\{Date}\\Player List\\playerlist.csv";
-            }
-            else if(filepath == DocumentFilepaths.PlayersWithProjections)
-            {
-                return $"{UserBasepath}\\Basketball\\{Date}\\Player List\\nba.csv";
-            }
-            else if(filepath == DocumentFilepaths.TopLineups)
-            {
-                return $"{UserBasepath}\\Basketball\\{Date}\\Lineups\\top_lineups.txt";
-            }
-            else if(filepath == DocumentFilepaths.NBAJsonPlayerList)
-            {
-                return $"{UserBasepath}\\Basketball\\{Date}\\Player List\\player_list.json";
-            }
-            return "";
         }
 
         private void Submit_scores_btn_Click(object sender, EventArgs e)
@@ -69,13 +49,21 @@ namespace ProjectionBuilder
                 try
                 {
                     double score = GetScore(team.Key);
+                    if(score > 150 || score < 80)
+                    {
+                        MessageBox.Show("Invalid score for " + team.Key, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        throw new Exception("Invalid");
+                    }
                     team.Value.SetImpliedScore(score);
                     scores.Add(score);
                 }
                 catch(Exception ex)
                 {
                     badData = true;
-                    MessageBox.Show("There is a score missing from " + team.Key, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if(ex.Message != "Invalid")
+                    {
+                        MessageBox.Show("There is a score missing from " + team.Key, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     break;
                 }
             }
@@ -113,7 +101,7 @@ namespace ProjectionBuilder
 
         private void Generate_CSV_btn_Click(object sender, EventArgs e)
         {
-            string fp = GetFilepath(DocumentFilepaths.PlayersWithProjections);
+            string fp = FileBuilder.GetFilepath(DocumentFilepaths.PlayersWithProjections, UserBasepath, Date, Basketball);
             FileBuilder.BuildCSV(Players, fp);
             FileBuilder.BuildConfig(Lineups_tb.Text, MaxPrice_tb.Text, WTNR_tb.Text, basepath_tb.Text, Date);
             MessageBox.Show("Success! Your CSV is located at " + fp, "Success", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -133,7 +121,7 @@ namespace ProjectionBuilder
             Process lineupProc = new Process();
             //lineupProc.StartInfo.FileName = pythonPath;
             lineupProc.StartInfo.FileName = csharpPath;
-            lineupProc.StartInfo.Arguments = $"\"{GetFilepath(DocumentFilepaths.NBAJsonPlayerList)}\"";
+            lineupProc.StartInfo.Arguments = FileBuilder.GetFilepath(DocumentFilepaths.JsonPlayerList, UserBasepath, Date, Basketball);
             lineupProc.Start();
         }
     }
