@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DFSLibrary.Models
 {
-    public class Team
+    public class BasketballTeam
     {
         public List<BasketballPlayer> PointGuards { get; set; }
         public List<BasketballPlayer> ShootingGuards { get; set; }
@@ -17,7 +17,7 @@ namespace DFSLibrary.Models
         public double ImpliedScore { get; set; }
         public double TeamTotalPoints { get; set; }
 
-        public Team(string teamName)
+        public BasketballTeam(string teamName)
         {
             TeamName = teamName;
             PointGuards = new List<BasketballPlayer>();

@@ -12,17 +12,26 @@ namespace NBALineupBuilder
 {
     public class BuildLineup
     {
-        private static readonly string ConfigFilepath = @"C:\\Users\\15133\\Documents\\dfs\\Basketball\\dfs-nba-config.txt";
+        private static readonly string NBAConfigFilepath = @"C:\Users\15133\Documents\dfs\Basketball\dfs-nba-config.txt";
+        private static readonly string NFLConfigFilepath = @"C:\Users\15133\Documents\dfs\Football\dfs-nfl-config.json";
         public static void Build(string filepath, Sport sport)
         {
             List<Player> players = new List<Player>();
             if (sport == Sport.Basketball)
             {
                 players = GetBasketballPlayerList(filepath);
-            }
-            DFSConfig config = new DFSConfig(ConfigFilepath);
 
-            LineupOptimizer lo = new LineupOptimizer(players, config);
+                DFSConfig config = new DFSConfig(NBAConfigFilepath);
+
+                LineupOptimizer lo = new LineupOptimizer(players, config);
+            }
+            else if(sport == Sport.Football)
+            {
+                List <FootballPlayer> fbPlayers = Newtonsoft.Json.JsonConvert.DeserializeObject<List<FootballPlayer>>(File.ReadAllText(filepath));
+                DFSConfig config = Newtonsoft.Json.JsonConvert.DeserializeObject<DFSConfig>(File.ReadAllText(NFLConfigFilepath));
+
+                NFLLineupOptimizer lo = new NFLLineupOptimizer(fbPlayers, config);
+            }
         }
         private static List<Player> GetBasketballPlayerList(string fp)
         {

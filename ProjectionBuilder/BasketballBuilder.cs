@@ -18,19 +18,20 @@ namespace ProjectionBuilder
     public partial class BasketballBuilder : Form
     {
         public List<BasketballPlayer> Players { get; set; }
-        public Dictionary<string, Team> Teams { get; set; }
+        public Dictionary<string, BasketballTeam> Teams { get; set; }
         public double AverageScore { get; set; }
         public string Date { get; set; }
         private readonly string Basketball = "Basketball";
-        private readonly string UserBasepath = @"C:\Users\15133\Documents\dfs\";
+        private readonly string UserBasepath = @"C:\Users\15133\Documents\dfs";
         public BasketballBuilder(string date)
         {
             InitializeComponent();
             Date_gb.Visible = false;
             Date = date;
             lineup_bp_text.Text = FileBuilder.GetFilepath(DocumentFilepaths.TopLineups, UserBasepath, Date, Basketball);
-            Players = BuilderService.SetUpPlayers(FileBuilder.GetFilepath(DocumentFilepaths.PlayerList, UserBasepath, Date, Basketball));
-            Teams = BuilderService.BuildTeams(Players);
+            FileBuilder.CSVCleaner(FileBuilder.GetFilepath(DocumentFilepaths.PlayerList, UserBasepath, Date, Basketball));
+            Players = BuilderService.SetUpNBAPlayers(FileBuilder.GetFilepath(DocumentFilepaths.PlayerList, UserBasepath, Date, Basketball));
+            Teams = BuilderService.BuildNBATeams(Players);
             ShowTeams();
             BB_Teams_gb.Visible = true;
             lineup_gb.Visible = true;
@@ -94,7 +95,7 @@ namespace ProjectionBuilder
 
         private void Projections_btn_Click(object sender, EventArgs e)
         {
-            Teams = BuilderService.GenerateProjections(AverageScore, Teams);
+            Teams = BuilderService.GenerateNBAProjections(AverageScore, Teams);
             Generate_proj_gb.Visible = false;
             Generate_csv_gb.Visible = true;
         }
@@ -102,6 +103,7 @@ namespace ProjectionBuilder
         private void Generate_CSV_btn_Click(object sender, EventArgs e)
         {
             string fp = FileBuilder.GetFilepath(DocumentFilepaths.PlayersWithProjections, UserBasepath, Date, Basketball);
+
             FileBuilder.BuildCSV(Players, fp);
             FileBuilder.BuildConfig(Lineups_tb.Text, MaxPrice_tb.Text, WTNR_tb.Text, basepath_tb.Text, Date);
             MessageBox.Show("Success! Your CSV is located at " + fp, "Success", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -121,7 +123,7 @@ namespace ProjectionBuilder
             Process lineupProc = new Process();
             //lineupProc.StartInfo.FileName = pythonPath;
             lineupProc.StartInfo.FileName = csharpPath;
-            lineupProc.StartInfo.Arguments = FileBuilder.GetFilepath(DocumentFilepaths.JsonPlayerList, UserBasepath, Date, Basketball);
+            lineupProc.StartInfo.Arguments = $"\"{FileBuilder.GetFilepath(DocumentFilepaths.JsonPlayerList, UserBasepath, Date, Basketball)}\" Basketball";
             lineupProc.Start();
         }
     }

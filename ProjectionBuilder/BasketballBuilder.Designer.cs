@@ -684,7 +684,7 @@
             this.BB_Teams_gb.Controls.Add(this.label4);
             this.BB_Teams_gb.Controls.Add(this.label3);
             this.BB_Teams_gb.Controls.Add(this.label2);
-            this.BB_Teams_gb.Location = new System.Drawing.Point(12, 12);
+            this.BB_Teams_gb.Location = new System.Drawing.Point(3, 0);
             this.BB_Teams_gb.Name = "BB_Teams_gb";
             this.BB_Teams_gb.Size = new System.Drawing.Size(525, 479);
             this.BB_Teams_gb.TabIndex = 59;
@@ -779,6 +779,7 @@
             // 
             this.Generate_csv_gb.Controls.Add(this.basepath_tb);
             this.Generate_csv_gb.Controls.Add(this.WTNR_tb);
+            this.Generate_csv_gb.Controls.Add(this.BB_Teams_gb);
             this.Generate_csv_gb.Controls.Add(this.MaxPrice_tb);
             this.Generate_csv_gb.Controls.Add(this.Lineups_tb);
             this.Generate_csv_gb.Controls.Add(this.label35);
@@ -926,7 +927,6 @@
             this.ClientSize = new System.Drawing.Size(1219, 752);
             this.Controls.Add(this.start_bb_python_btn);
             this.Controls.Add(this.lineup_gb);
-            this.Controls.Add(this.BB_Teams_gb);
             this.Controls.Add(this.Generate_csv_gb);
             this.Controls.Add(this.Generate_proj_gb);
             this.Controls.Add(this.Date_gb);

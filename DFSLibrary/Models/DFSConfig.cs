@@ -11,7 +11,10 @@ namespace DFSLibrary.Models
         public int WTNR { get; set; }
         public int MaxSalary { get; set; }
         public int Lineups { get; set; }
-
+        public int DefenseBudget { get; set; }
+        public string TopLineupCSVPath { get; set; }
+        public string TopLineupJSONPath { get; set; }
+        public DFSConfig() { }
         public DFSConfig(string filepath)
         {
             string[] lines = System.IO.File.ReadAllLines(filepath);
