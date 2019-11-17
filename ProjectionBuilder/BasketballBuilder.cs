@@ -73,6 +73,7 @@ namespace ProjectionBuilder
             {
                 AverageScore = scores.Average();
                 AverageScore = AverageScore * .969;
+                SetUpConfigText();
                 BB_Teams_gb.Visible = false;
                 Generate_proj_gb.Visible = true;
             }
@@ -105,7 +106,7 @@ namespace ProjectionBuilder
             string fp = FileBuilder.GetFilepath(DocumentFilepaths.PlayersWithProjections, UserBasepath, Date, Basketball);
 
             FileBuilder.BuildCSV(Players, fp);
-            FileBuilder.BuildConfig(Lineups_tb.Text, MaxPrice_tb.Text, WTNR_tb.Text, basepath_tb.Text, Date);
+            FileBuilder.BuildJSONConfig(Lineups_tb.Text, MaxPrice_tb.Text, WTNR_tb.Text, basepath_tb.Text, Date);
             MessageBox.Show("Success! Your CSV is located at " + fp, "Success", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
 
@@ -118,13 +119,21 @@ namespace ProjectionBuilder
 
         private void Start_bb_python_btn_Click(object sender, EventArgs e)
         {
-            string csharpPath = @"C:\Users\15133\Documents\dfs\ProjectionBuilder\NBALineupBuilder\bin\Debug\NBALineupBuilder.exe";
+            string csharpPath = @"LineupBuilder.exe";
             string pythonPath = Path.Combine(UserBasepath, "ProjectionBuilder", "python scripts", "dfs-nba-fuel.py");
             Process lineupProc = new Process();
             //lineupProc.StartInfo.FileName = pythonPath;
             lineupProc.StartInfo.FileName = csharpPath;
             lineupProc.StartInfo.Arguments = $"\"{FileBuilder.GetFilepath(DocumentFilepaths.JsonPlayerList, UserBasepath, Date, Basketball)}\" Basketball";
             lineupProc.Start();
+        }
+        private void SetUpConfigText()
+        {
+            DFSConfig config = Newtonsoft.Json.JsonConvert.DeserializeObject<DFSConfig>(File.ReadAllText(FileBuilder.GetFilepath(DocumentFilepaths.DFSConfigFile, UserBasepath, "", Basketball)));
+            Lineups_tb.Text = config.Lineups.ToString();
+            WTNR_tb.Text = config.WTNR.ToString();
+            MaxPrice_tb.Text = config.MaxSalary.ToString();
+            basepath_tb.Text = Path.Combine(UserBasepath, "Football");
         }
     }
 }
